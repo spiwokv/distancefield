@@ -7,6 +7,8 @@
 `./distancefield.o protein.pdb 70 70 70 2 10 10 10 > distances.txt`
 
 Protein must be centered in the periodic box with coordinates x = 0 -- 70, y = 0 -- 70 and z = 0 -- 70 (in Angstroms).
+Ligands must be removed. Proteins containing non-proteinous elements (e.g. P) are not suported. Element symbol
+(N, C, O or S) must be in the column number 14.
 Grid will be separated by 2 Angstroms (low value may cause huge number of grid points leading to lack of memory!).
 The binding site is located in x_i = 10, y_i = 10 and z_i = 10 (i.e. [21,21,21] Angstroms).
 
