@@ -1,9 +1,9 @@
-## Distancefield
+# Distancefield
 
-# Compile:
+## Compile:
 `gcc -o distancefield.o distancefield.c -lm`
 
-# Usage
+## Usage
 `./distancefield.o protein.pdb 70 70 70 2 10 10 10 > distances.txt`
 
 Protein must be centered in the periodic box with coordinates x = 0 -- 70, y = 0 -- 70 and z = 0 -- 70 (in Angstroms).
