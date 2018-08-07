@@ -13,6 +13,6 @@ Element symbol (N, C, O or S) must be in the column number 14. Only atoms strati
 considered. The binding site is located in x_i = 15, y_i = 21 and z_i = 14 (i.e. [31.0,43.0,29.0] Angstroms).
 
 The code will separate the box by a grid with 35x35x35 (for the above presented seting). Points coliding with the protein will
-be ignored. Next it will calculate a minimal distance of each point from the binding site using Dijkstra's algorithm and
-print them to the output.
+be ignored. Next it will calculate a minimal distance of each point from the binding site using Dijkstra's algorithm 
+(will take couple of minutes) and print them to the output.
 
