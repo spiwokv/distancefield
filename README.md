@@ -6,7 +6,7 @@
 ## Usage
 `./distancefield.o protein.pdb 35 35 35 2 15 21 14 > distances.txt`
 
-Protein must be centered in the periodic box with coordinates x = 0 -- 70, y = 0 -- 70 and z = 0 -- 70
+Protein must be centered in the periodic box with coordinates x = 0 &mdash; 70, y = 0 &mdash; 70 and z = 0 &mdash; 70
 (35x2 in Angstroms). Grid will be separated by 2 Angstroms (total number of grid points must not exceed 100,000!).
 Ligands must be removed. Proteins containing non-proteinous elements (e.g. P) are not suported.
 Element symbol (N, C, O or S) must be in the column number 14. Only atoms strating by ATOM will be 
