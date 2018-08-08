@@ -1,4 +1,4 @@
-# Distancefield
+# Distance field
 
 ## Compile:
 `gcc -o distancefield.o distancefield.c -lm`
@@ -17,6 +17,8 @@ considered. The binding site is located in x_i = 15, y_i = 21 and z_i = 14 (i.e.
 The code will separate the box by a grid with 35x35x35 (for the above presented seting). Points coliding with the protein will
 be ignored. Next it will calculate a minimal distance of each point from the binding site using Dijkstra's algorithm 
 (will take couple of minutes) and print them to the output.
+
+![Distance field on trypsin](https://github.com/spiwokv/distancefield/blob/master/trypsin.jpg)
 
 ![comparison of Euclidean and shortest distance](https://github.com/spiwokv/distancefield/blob/master/disrances.png)
 
