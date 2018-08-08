@@ -3,8 +3,10 @@
 ## Compile:
 `gcc -o distancefield.o distancefield.c -lm`
 
-## Usage
+## Usage:
 `./distancefield.o protein.pdb 35 35 35 2 15 21 14 > distances.txt`
+
+In the command specify size of the box in bins, bin size and the binding site (in bin coordinates).
 
 Protein must be centered in the periodic box with coordinates x = 0 &mdash; 70, y = 0 &mdash; 70 and z = 0 &mdash; 70
 (35x2 in Angstroms). Grid will be separated by 2 Angstroms (total number of grid points must not exceed 100,000!).
