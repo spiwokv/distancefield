@@ -18,3 +18,6 @@ The code will separate the box by a grid with 35x35x35 (for the above presented 
 be ignored. Next it will calculate a minimal distance of each point from the binding site using Dijkstra's algorithm 
 (will take couple of minutes) and print them to the output.
 
+![comparison of Euclidean and shortest distance](https://github.com/spiwokv/distancefield/blob/master/disrances.png)
+
+
