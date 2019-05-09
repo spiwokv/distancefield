@@ -36,15 +36,15 @@ double dist2(int x1, int y1, int z1, int x2, int y2, int z2, double sep, int nx,
 }
 
 int mindistance(double dist[], int sptSet[], int nbins) {
-   double min = 10000.0;
-   int min_index;
-   for(int v=0;v<nbins;v++) {
-     if (sptSet[v] == 0 && dist[v] <= min) {
-       min = dist[v];
-       min_index = v;
-     }
-   }
-   return min_index;
+  double min = 10000.0;
+  int min_index;
+  for(int v=0;v<nbins;v++) {
+    if (sptSet[v] == 0 && dist[v] <= min) {
+      min = dist[v];
+      min_index = v;
+    }
+  }
+  return min_index;
 }
 
 int main (int argc, char *argv[]) {
@@ -59,9 +59,10 @@ int main (int argc, char *argv[]) {
   int sptSet[100000];
   FILE* fp;
   char elems[5] = {'H','C','N','O','S'};
-  char buf[200];
-  char subbuf[3];
-  char subbuf2[8];
+  //char elems[5] = "HCNOS";
+  //char buf[200];
+  //char subbuf[4];
+  //char subbuf2[8];
   char atoms[100000];
   double d;
   double sep;
@@ -96,23 +97,72 @@ int main (int argc, char *argv[]) {
   if(ny>maxn) maxn = ny;
   if(nz>maxn) maxn = nz;
 
+
+  i = 0;
+  fp = fopen(argv[1], "r");
+  if(feof(fp)) {
+    printf("File reading error\n");
+    return 0;
+  }
+  char buf[255];
+  while(!feof(fp)) {
+    fgets(buf, 255, (FILE*)fp);
+    char check[4];
+    strncpy(check, buf, 4);
+    check[4] = '\0';
+    if(strcmp(check,"ATOM")==0) {
+      char atomtype[1];
+      strncpy(atomtype, buf+13, 1);
+      atomtype[1] = '\0';
+      atoms[i] = atomtype[0];
+      char subbuf[8];
+      sscanf(strncpy(subbuf, buf+30, 8), "%lf", &d);
+      coords[i][0] = d;
+      sscanf(strncpy(subbuf, buf+38, 8), "%lf", &d);
+      coords[i][1] = d;
+      sscanf(strncpy(subbuf, buf+46, 8), "%lf", &d);
+      coords[i][2] = d;
+      i++;
+    }
+  }
+  fclose(fp);
+  natoms = i-1;
+//  printf("%i\n", natoms);
+//  for(l=0;l<natoms;l++) {
+//    char atomtype[1];
+//    strncpy(atomtype,atoms+l,1);
+//    atomtype[1] = '\0';
+//    printf("%s\n",atomtype);
+//    printf("%f %f %f\n", coords[l][0], coords[l][1], coords[l][2]);
+//  }
+
+/*
   fp = fopen(argv[1], "r");
   i = 0;
   while (fgets(buf, sizeof(buf), fp) != NULL) {
+        char check[4];
+        strncpy(check,test,4);
+        if(strcmp(check,"ATOM")==0)
+        {
+            fprintf(stdout,"%s\n",test);
+        }           
+
     buf[strlen(buf) - 1] = '\0';
-    if(!strcmp(memcpy(subbuf,&buf[0],4),"ATOM")) {
+    if(!strcmp(strncpy(subbuf,buf,4),"ATOM")) {
       atoms[i] = buf[13];
-      sscanf(memcpy(subbuf2,&buf[30],8), "%lf", &d);
+      sscanf(strncpy(subbuf2,buf+30,8), "%lf", &d);
       coords[i][0] = d;
-      sscanf(memcpy(subbuf2,&buf[38],8), "%lf", &d);
+      sscanf(strncpy(subbuf2,buf+38,8), "%lf", &d);
       coords[i][1] = d;
-      sscanf(memcpy(subbuf2,&buf[46],8), "%lf", &d);
+      sscanf(strncpy(subbuf2,buf+46,8), "%lf", &d);
       coords[i][2] = d;
       i++;
     }
   }
   fclose(fp);
   natoms = i;
+  printf("%i\n", natoms);
+*/
 
   for(i=0;i<nx*ny*nz;i++) {
     iz = i % nz;
@@ -135,13 +185,20 @@ int main (int argc, char *argv[]) {
     }
     inout[i] = inside;
   }
+  inout[ny*nz*cx+nz*cy+cz] = 0;
+  //inout[ny*nz*15+nz*17+14] = 0;
+  //inout[ny*nz*15+nz*18+14] = 0;
+  inout[ny*nz*15+nz*19+14] = 0;
+  inout[ny*nz*15+nz*20+14] = 0;
+  inout[ny*nz*15+nz*21+14] = 0;
 
-/*
+
   // PRINT grid.pdb
+/*
   for(i=0;i<nx;i++) {
     for(j=0;j<ny;j++) {
       for(k=0;k<nz;k++) {
-        if(inout[ny*nz*i+nz*j+k] == 1) {
+        if(inout[ny*nz*i+nz*j+k] == 0) {
           pos[0] = 2.0*(double)i + 1.0;
           pos[1] = 2.0*(double)j + 1.0;
           pos[2] = 2.0*(double)k + 1.0;
